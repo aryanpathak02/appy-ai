@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { showToast } from "@/lib/toast";
 
-export default function LoginPage() {
+// ─── Inner component — uses useSearchParams, must be inside <Suspense> ────────
+
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -127,5 +129,15 @@ export default function LoginPage() {
         </button>
       </form>
     </div>
+  );
+}
+
+// ─── Page — wraps LoginForm in Suspense as required by Next.js ────────────────
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }
