@@ -41,7 +41,7 @@ ApplyAI helps job seekers stay organised and use AI to get an edge. Instead of t
 ### User & Profile
 | Feature | Description |
 |---|---|
-| **Resume Upload** | Upload PDF resume to Cloudinary; text is auto-extracted for AI matching |
+| **Resume Upload** | Upload PDF resume to Supabase Storage; text is auto-extracted for AI matching |
 | **Resume Preview** | Inline PDF viewer proxied through the server (no CORS issues) |
 | **Profile Management** | Update name, email, and password from the dashboard |
 
@@ -64,7 +64,7 @@ ApplyAI helps job seekers stay organised and use AI to get an edge. Instead of t
 | **Database** | MongoDB + Mongoose 9 |
 | **Auth** | JWT + bcryptjs + httpOnly cookies |
 | **AI** | Groq SDK (llama3-70b) |
-| **File Storage** | Cloudinary (resume PDFs) |
+| **File Storage** | Supabase Storage (resume PDFs) |
 | **PDF Parsing** | pdf-parse |
 | **PDF Generation** | jsPDF |
 | **Validation** | Zod v4 |
@@ -112,7 +112,7 @@ src/
 
 - Node.js 18+
 - MongoDB running locally (`mongodb://127.0.0.1:27017`) or a MongoDB Atlas URI
-- A [Cloudinary](https://cloudinary.com) account (free tier works)
+- A [Supabase](https://supabase.com) project (free tier works — used for resume storage)
 - A [Groq](https://console.groq.com) API key (free tier works)
 
 ### 1. Clone the repository
@@ -140,16 +140,22 @@ MONGODB_URI=mongodb://127.0.0.1:27017/apply-ai
 JWT_SECRET=your_jwt_secret_min_32_chars
 JWT_EXPIRES_IN=7d
 
-# Cloudinary
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+# Supabase Storage
+SUPABASE_URL=https://your-project-id.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
 # Groq
 GROQ_API_KEY=your_groq_api_key
 ```
 
-### 4. Run the development server
+### 4. Create the Supabase Storage bucket
+
+In your [Supabase dashboard](https://supabase.com/dashboard):
+1. Go to **Storage** → **New bucket**
+2. Name it `resumes` and set it to **Public**
+3. Copy your **Project URL** and **service_role** key from **Project Settings → API**
+
+### 5. Run the development server
 
 ```bash
 npm run dev
@@ -166,9 +172,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `MONGODB_URI` | ✅ | MongoDB connection string |
 | `JWT_SECRET` | ✅ | Secret key for signing JWTs (min 32 chars recommended) |
 | `JWT_EXPIRES_IN` | ❌ | Token expiry duration (default: `7d`) |
-| `CLOUDINARY_CLOUD_NAME` | ✅ | Your Cloudinary cloud name |
-| `CLOUDINARY_API_KEY` | ✅ | Cloudinary API key |
-| `CLOUDINARY_API_SECRET` | ✅ | Cloudinary API secret |
+| `SUPABASE_URL` | ✅ | Your Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | Supabase service-role key (server-side only) |
 | `GROQ_API_KEY` | ✅ | Groq API key for AI features |
 
 ---

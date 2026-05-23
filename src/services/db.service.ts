@@ -1,4 +1,4 @@
-import { Model, RootFilterQuery } from "mongoose";
+import { Model, FilterQuery } from "mongoose";
 
 /**
  * db.service.ts — Generic reusable mongoose CRUD operations.
@@ -7,7 +7,7 @@ import { Model, RootFilterQuery } from "mongoose";
 
 export const dbService = {
   /** Find a single document matching the filter */
-  findOne<T>(model: Model<T>, filter: RootFilterQuery<T>) {
+  findOne<T>(model: Model<T>, filter: FilterQuery<T>) {
     return model.findOne(filter).lean().exec();
   },
 
@@ -17,7 +17,7 @@ export const dbService = {
   },
 
   /** Find all documents matching the filter */
-  findMany<T>(model: Model<T>, filter: RootFilterQuery<T> = {}) {
+  findMany<T>(model: Model<T>, filter: FilterQuery<T> = {}) {
     return model.find(filter).lean().exec();
   },
 
