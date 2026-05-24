@@ -216,7 +216,7 @@ function AiMatchSection({ job }: { job: Job }) {
         <span className="text-3xl">🤖</span>
         <p className="text-sm font-medium text-zinc-700 mt-2">No AI match yet</p>
         <p className="text-xs text-zinc-400 mt-1">
-          Go to Applied Jobs and click "AI Match" on this job card.
+          Go to Applied Jobs and click &quot;AI Match&quot; on this job card.
         </p>
       </div>
     );

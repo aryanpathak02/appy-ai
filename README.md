@@ -8,6 +8,19 @@
 
 ---
 
+## Demo Account
+
+A pre-seeded account is available for evaluators to explore the app without registering:
+
+| Field    | Value                     |
+|----------|---------------------------|
+| Email    | `vidhigajera2004@gmail.com` |
+| Password | `demo@1234`                 |
+
+> The demo account has sample jobs, an AI match result, and a resume already uploaded so all features are visible immediately.
+
+---
+
 ## What is ApplyAI?
 
 ApplyAI helps job seekers stay organised and use AI to get an edge. Instead of tracking applications in spreadsheets and guessing whether your resume fits a role, ApplyAI gives you:

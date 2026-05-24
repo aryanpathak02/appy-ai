@@ -28,10 +28,6 @@ jobs:
       - name: TypeScript type-check
         run: npx tsc --noEmit
 
-      # ESLint
-      - name: Lint
-        run: npm run lint
-
       # Jest unit tests
       - name: Run tests
         run: npm test

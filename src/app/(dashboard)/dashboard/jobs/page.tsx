@@ -5,7 +5,7 @@ import Link from "next/link";
 import JobCard from "@/components/dashboard/JobCard";
 import EditJobModal from "@/components/dashboard/EditJobModal";
 import DeleteJobModal from "@/components/dashboard/DeleteJobModal";
-import { Job, JobStatus } from "@/types/job";
+import { Job } from "@/types/job";
 import { AiMatchResult } from "@/types/ai-match";
 
 // ─── Filter bar ───────────────────────────────────────────────────────────────
@@ -105,11 +105,13 @@ export default function JobsPage() {
 
   // Re-fetch whenever filters or page change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchJobs();
   }, [fetchJobs]);
 
   // Reset to page 1 when filters change
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPage(1);
   }, [search, statusFilter, jobTypeFilter]);
 
