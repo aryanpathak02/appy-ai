@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  ci:
+    name: Lint, Type-check & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Type-check without emitting files
+      - name: TypeScript type-check
+        run: npx tsc --noEmit
+
+      # ESLint
+      - name: Lint
+        run: npm run lint
+
+      # Jest unit tests
+      - name: Run tests
+        run: npm test
+        env:
+          # Dummy values so env.ts validation doesn't throw during tests
+          MONGODB_URI: mongodb://localhost:27017/test
+          JWT_SECRET: test_secret_for_ci_only_32_chars_min
+          GROQ_API_KEY: test_groq_key
+          SUPABASE_URL: https://test.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: test_service_role_key

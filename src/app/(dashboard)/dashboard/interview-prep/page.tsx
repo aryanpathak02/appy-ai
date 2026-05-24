@@ -178,6 +178,9 @@ export default function InterviewPrepPage() {
   const [downloading, setDownloading] = useState(false);
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
+  // Button is only active when both required fields are filled
+  const canSubmit = form.role.trim().length >= 2 && form.company.trim().length >= 2;
+
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) {
@@ -363,7 +366,7 @@ export default function InterviewPrepPage() {
         {/* Submit */}
         <button
           type="submit"
-          disabled={loading}
+          disabled={!canSubmit || loading}
           className="w-full rounded-lg bg-zinc-900 py-3 text-sm font-medium text-white hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
         >
           {loading ? "⏳ Generating questions..." : "🎯 Generate Interview Questions"}
